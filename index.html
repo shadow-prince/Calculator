@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kotheyyyy!</title>
+    <link rel="shortcut icon" href="https://raw.githubusercontent.com/shadow-prince/owl-favicon/main/favicon.ico" type="image/x-icon">
+    <link href=" https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.2/angular.min.js"></script>
+</head>
+<style>
+    table,
+    th,
+    td {
+        border: 1px solid rgb(0, 0, 0);
+    }
+</style>
+
+<body class="bg-dark" ng-app="myapp">
+    <div ng-controller="HelloController">
+        <div class="container">
+            <h1 class="text-center text-white"> 🙉 Calculator</h1>
+            <!-- <h2 class="display-4">Welcome {{helloTo.title}}!</h2>
+                <select class="form-control" ng-model="selectedName" ng-options="x for x in names" name="" id=""></select>
+                <p class="lead">You selected : {{selectedName}} </p>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input class="form-control" ng-required="emailRequired" type="text" id="email">
+                </div>
+
+                <div class="form-check">
+                    <label for="emailRequired">Has Email? </label>
+                    <input class="form-check-input" ng-model="emailRequired" class="form-check-label" type="checkbox"
+                        name="" id="emailRequired">
+                </div> -->
+
+            <table
+                class="shadow p-3 mb-5 bg-body rounded position-absolute top-50 start-50 translate-middle text-center">
+                <tr>
+                    <td colspan="4">
+                        <textarea ng-keydown="validateDecimalPoint($event)" autofocus type="text" ng-model="Result"
+                            class="form-control" cols="30" rows="10"></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3">
+                        <input disabled style="text-align: right;" id="ans" type="text" ng-model="Answer"
+                            class="form-control">
+                    </td>
+                    <td>
+                        <button type="button" title="Copy Result" class="btn btn-outline-success btn-block"
+                            style="width: 100%;" ng-click="copyToClipboard()">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                class="bi bi-clipboard-check" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd"
+                                    d="M10.854 7.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 9.793l2.646-2.647a.5.5 0 0 1 .708 0z">
+                                </path>
+                                <path
+                                    d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z">
+                                </path>
+                                <path
+                                    d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z">
+                                </path>
+                            </svg>
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <a ng-click="Result = Result+1" class="btn btn-primary btn-lg "> 1 </a>
+                    </td>
+                    <td>
+                        <a ng-click="Result = Result+2" class="btn btn-primary btn-lg"> 2 </a>
+                    </td>
+                    <td>
+                        <a ng-click="Result = Result+3" class="btn btn-primary btn-lg"> 3 </a>
+                    </td>
+                    <td>
+                        <a ng-click="Result = Result+  '+' ;dotNotDisabled=true " class="btn btn-secondary btn-lg"
+                            style="width:100%;"> +
+                        </a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <a ng-click="Result = Result+4" class="btn btn-primary btn-lg"> 4 </a>
+                    </td>
+                    <td>
+                        <a ng-click="Result = Result+5" class="btn btn-primary btn-lg"> 5 </a>
+                    </td>
+                    <td>
+                        <a ng-click="Result = Result+6" class="btn btn-primary btn-lg"> 6 </a>
+                    </td>
+                    <td>
+                        <a ng-click="Result = Result+  '-' ;dotNotDisabled=true" class="btn btn-secondary btn-lg"
+                            style="width:100%;"> -
+                        </a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <a ng-click="Result = Result+7" class="btn btn-primary btn-lg"> 7 </a>
+                    </td>
+                    <td>
+                        <a ng-click="Result = Result+8" class="btn btn-primary btn-lg"> 8 </a>
+                    </td>
+                    <td>
+                        <a ng-click="Result = Result+9" class="btn btn-primary btn-lg"> 9 </a>
+                    </td>
+                    <td>
+                        <a ng-click="Result = Result+  '*';dotNotDisabled=true " class="btn btn-secondary btn-lg"
+                            style="width:100%;">x</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <a ng-click="Result  = '' ; Answer=0;dotNotDisabled=true " class="btn btn-danger btn-lg">C</a>
+                    </td>
+                    <td>
+                        <a ng-click="Result = Result+0" class="btn btn-primary btn-lg"> 0</a>
+                    </td>
+                    <td>
+                        <button ng-click="backSpace()" class="btn btn-warning material-icons">&#xe14a;</button>
+                    </td>
+                    <td>
+                        <a ng-click="Result = Result+'/';dotNotDisabled=true" class="btn btn-secondary btn-lg"
+                            style="width:100%;"> ÷</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3">
+                        <button type="button" style="width:100%;" ng-click="myEval(Result)"
+                            class="btn btn-outline-danger btn-lg btn-block"> = </button>
+                    </td>
+                    <td>
+                        <a ng-click="decimalDot()" ng-if="dotNotDisabled" class="btn btn-secondary btn-lg"
+                            style="width:100%;"> .</a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <script src="./Js/HelloController.js"></script>
+</body>
